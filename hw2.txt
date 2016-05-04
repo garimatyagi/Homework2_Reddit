@@ -15,3 +15,85 @@ From reddit
 
 Did anything appear in your working directory? Why?
 Ans:- Now remote directory got fetched. Fetch=pull+merge
+
+Your working directory should have been updated. You should check that. That means the master branch was updated on the remote. But it's possible that when we ran git fetch, we fetched other branches as well! How could we (i.e. what command could we use) find all the branches we may have gotten from the remote?
+Ans:- git branch -r
+
+Garima@LAPTOP-UCURRQTB MINGW64 /c/repos/hw2/reddit (master)
+$ git branch -r
+  origin/HEAD -> origin/master
+  origin/ad-images-test
+  origin/add_promote_cost_basis
+  origin/master
+  origin/opensource-master
+
+Question:- find the file on that branch, and give the first five letters of that file as well as the command you used to checkout the branch. NOTE: It's very bad practice to directly git checkout the remote-tracking branch. Instead, try to checkout the branch so that it creates a local branch based on the remote-tracking branch. If you're not sure how (it's pretty easy to guess, though), you can look it up.
+Ans:- 
+
+Garima@LAPTOP-UCURRQTB MINGW64 /c/repos/hw2/reddit (master)
+$ git checkout origin/ad-images-test
+Note: checking out 'origin/ad-images-test'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at bdf7ce8... ad embeds: enable embedding arbitrary urls for sponsor level accounts.
+
+Question:- What is a bare repository? What makes it different from normal repositories? In what situations is it used?
+When creating a central repository that will be shared by other users, the repositories should be created with the –bare option:
+git init --bare project1.git
+When you create a git repository with the –bare option:
+
+There is no working directory created.
+There is no .git directory created. Instead, the files normally in the .git directory are placed in the top-level directory where the working directory would normally be.
+If we are colloborating with the team and all the working on same project and need a place to share or change the repo then we will start creating a bare repo. then you will want to create a bare repository in centralized place where all users can push their changes. Because git is a distributed version control system, no one will directly edit files in the shared centralized repository. Instead developers will clone the shared bare repo, make changes locally in their working copies of the repo, then push back to the shared bare repo to make their changes available to other users.
+
+ques:- In lecture, I was careful to explain the two-step procedure of using git fetch and git merge remotename/branchname to get commits from a remote. When would this be a good idea as opposed to simply doing git pull remotename branchname? Briefly discuss remote-tracking branches and their relevance in your answer.
+
+Ans:- Git fetch = git pull + merge. we dont have to do first pull and then merge
+If we want all the information other has in their repo. that we don't have yet in our repository.
+
+Question:-Briefly discuss remote-tracking branches and their relevance in your answer.
+
+Remote Tracking Branches:- When we clone a repository, Git sets up “remote-tracking” branches corresponding to the branches in the origin repository. These are branches in our local repository, which show us the state of the origin branches at the time of our last push or pull. When we check out a branch that doesn’t yet exist, but there is a remote-tracking branch by that name, Git automatically creates it and sets its upstream to be that tracking branch, so that subsequent push/pull operations will synchronize your local version of this branch with the remote’s version. For example, when you first clone a repository, Git checks out the remote’s HEADbranch, so this happens right away for one branch:
+Garima@LAPTOP-UCURRQTB MINGW64 /c/repos/hw2/reddit (master)
+$ git branch --all
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/ad-images-test
+  remotes/origin/add_promote_cost_basis
+  remotes/origin/master
+  remotes/origin/opensource-master
+
+
+Garima@LAPTOP-UCURRQTB MINGW64 /c/repos/hw2/reddit (master)
+$ git log --oneline --decorate=short
+edf462c (HEAD -> master) test to check new remote origin
+a473850 (origin/master, origin/HEAD) After a post has been distinguished, change text to "Undistinguish"
+75e1ccb Fix import issue in app_globals.
+71f5a11 ratelimit: Add support for specifying user agent regexes.
+218c89b Add missing event actions to flatlist links
+c5ebeae Add more data-attributes to things
+62de8c0 Admin Tools: Relabel details page link
+abff938 Admin Tools: Remove details link from messages
+a40b7f5 js.py: Break out some small modules
+e0078ea js.py: Add test for filter_module option
+4cb7fc2 js.py: Add option to filter sources from another module
+067f2a2 js.py: Add test for Module.get_flattened_sources
+1a367e6 js.py: Make FileSource easier to test
+c32f0e2 js.py: Remove duplicate sources before building
+f446944 reverse_gold_purchase: Add missing gold_recipient
+149010c POST_comment: use stale Subreddit lookup
+1a93036 POST_vote: Don't pass subreddit to VNotInTimeout
+2f74207 Allow stickies to be auto-hidden outside the SR
+e3df4f4 Thing.write_things_to_cache: handle exception on add_multi
+e8a7216 Add baseplate root spans in queue processors and cron jobs
+5880077 Reset password page: update text
+2abe2fe Thing: add tests
+
