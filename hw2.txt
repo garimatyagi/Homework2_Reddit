@@ -1,0 +1,17 @@
+Hello
+
+remote -v:- should show all the remote repo's available.
+
+Garima@LAPTOP-UCURRQTB MINGW64 /c/repos/hw2 (master)
+$ git fetch reddit
+remote: Counting objects: 69084, done.
+remote: Compressing objects: 100% (13143/13143), done.
+Receiving objects: 100% (69084/69084), 37.13 MiB | 11.25 MiB/s, done.
+remote: Total 69084 (delta 55832), reused 69084 (delta 55832)
+Resolving deltas: 100% (55832/55832), done.
+From reddit
+ * branch            HEAD       -> FETCH_HEAD
+
+
+Did anything appear in your working directory? Why?
+Ans:- Now remote directory got fetched. Fetch=pull+merge
